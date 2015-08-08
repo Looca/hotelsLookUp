@@ -1,0 +1,62 @@
+<!doctype html>
+<html class="no-js" lang="" ng-app="travelPlanet">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Hotels Look Up</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style>
+        .o-hotel:nth-child(2n+1) {clear:left;}
+        @media (min-width: 992px) {
+            .o-hotel:nth-child(2n+1) {clear:none;}
+            .o-hotel:nth-child(4n+1) {clear:left;}
+        }
+    </style>
+</head>
+<body>
+    <div class="container" ng-controller="ListCtrl as list">
+        <h1>Welcome to Hotels Look Up</h1>
+        <input placeholder="filter by Name" type="text" ng-model="by_name">
+        <input placeholder="filter by Stars" type="text" ng-model="by_stars">
+        <input placeholder="filter by Location" type="text" ng-model="by_Location">
+        <input placeholder="filter by UserRating" type="text" ng-model="by_userRating">
+        <input placeholder="filter by MinCost" type="text" ng-model="by_minCost">
+        <hr>
+        <input type="radio" name="order" ng-click="reverse=!reverse;list.order('Distance', reverse)">Distance</input>
+        <input type="radio" name="order" ng-click="reverse=!reverse;list.order('Stars', reverse)">Stars</input>
+        <input type="radio" name="order" ng-click="reverse=!reverse;list.order('Location', reverse)">Location</input>
+        <input type="radio" name="order" ng-click="reverse=!reverse;list.order('UserRating', reverse)">UserRating</input>
+        <input type="radio" name="order" ng-click="reverse=!reverse;list.order('MinCost', reverse)">MinCost</input>
+        <hr>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row" start="{{list.currentPage*list.itemsPerPage-list.itemsPerPage+1}}">
+                    <div class="col-xs-6 col-md-3 o-hotel" ng-repeat="hotel in list.hotelsList | pages: list.currentPage : list.itemsPerPage | filter:{ Name: by_name, Stars: by_stars, Location: by_Location,  UserRating: by_userRating, MinCost: by_minCost}">
+                        <img ng-src="{{hotel.ImageUrl}}" alt="{{hotel.Name}}" class="img-responsive">
+                        <ul class="list list-unstyled text-center">
+                            <li><h2>{{hotel.Name}} </h2></li>
+                            <li>Stars: {{hotel.Stars}}</li>
+                            <li>User Count : {{hotel.Location}}</li>
+                            <li>User Rating: {{hotel.UserRating}}</li>
+                            <li>Location: {{hotel.Location}}</li>
+                            <li></li>
+                        </ul>
+                        </div>
+                    </div>
+
+                    <pagination total-items="list.totalItems" ng-model="list.currentPage" items-per-page="list.itemsPerPage"max-size="list.maxSize"></pagination>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.js"></script>
+        <script src="hotels-listing-app.js"></script>
+    </body>
+    </html>
