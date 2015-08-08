@@ -1,4 +1,4 @@
-var tpApp = angular.module('travelPlanet', ['ui.bootstrap']);
+var tpApp = angular.module('hotelsApp', ['ui.bootstrap']);
 // test
 tpApp.controller('ListCtrl', ['$scope','$filter', 'HotelService', function($scope,$filter,HotelService) {
   var self = this,
@@ -27,7 +27,7 @@ tpApp.controller('ListCtrl', ['$scope','$filter', 'HotelService', function($scop
 // Get Hotels Data
 tpApp.factory('HotelService', ['$http',
   function ($http) {
-    var url = '/travelPlanet/hotels.json',
+    var url = '/hotelsLookUp/hotels.json',
         hotelService = {};
     hotelService.getHotels = function () {
       return $http.get(url);
