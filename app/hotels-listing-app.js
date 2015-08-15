@@ -1,6 +1,6 @@
-var tpApp = angular.module('hotelsApp', ['ui.bootstrap']);
+var hotelsApp = angular.module('hotelsApp', ['ui.bootstrap']);
 // test
-tpApp.controller('ListCtrl', ['$scope','$filter', 'HotelService', function($scope,$filter,HotelService) {
+hotelsApp.controller('ListCtrl', ['$scope','$filter', 'HotelService', function($scope,$filter,HotelService) {
   var self = this,
       orderBy = $filter('orderBy');
       
@@ -25,7 +25,7 @@ tpApp.controller('ListCtrl', ['$scope','$filter', 'HotelService', function($scop
 }]);
 
 // Get Hotels Data
-tpApp.factory('HotelService', ['$http',
+hotelsApp.factory('HotelService', ['$http',
   function ($http) {
     var url = '/hotelsLookUp/hotels.json',
         hotelService = {};
@@ -37,7 +37,7 @@ tpApp.factory('HotelService', ['$http',
 ]);
 
 //Filter needed for correct pagination
-tpApp.filter('pages', function() {
+hotelsApp.filter('pages', function() {
   return function(input, currentPage, pageSize) {
     if (angular.isArray(input)) {
       var start = (currentPage-1)*pageSize;
